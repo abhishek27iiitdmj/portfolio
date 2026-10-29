@@ -4,87 +4,336 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abhishek Kumar</title>
+    <meta name="description" content="Abhishek Kumar - Creative DevOps & AI enthusiast. Interactive portfolio.">
+    <meta name="theme-color" content="#0b1020">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap');
 
+        :root {
+            --bg: #070b1a;
+            --line: rgba(255, 255, 255, 0.12);
+            --text: #eef1ff;
+            --muted: #a3aedb;
+            --a: #22d3ee;
+            --b: #8b5cf6;
+            --c: #f472b6;
+            --grad: linear-gradient(120deg, var(--a), var(--b) 55%, var(--c));
+        }
+        * { box-sizing: border-box; }
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             width: 100%;
             overflow: hidden;
-            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
         }
         .container {
             display: flex;
             flex-direction: column;
             height: 100%;
+            height: 100dvh;
             width: 100%;
-        }
-        .header {
-            text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
-            margin: 0;
             position: relative;
-            overflow: hidden;
         }
-        .header::before {
+        .aurora {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(55vw 40vw at 5% 0%, rgba(139, 92, 246, 0.35), transparent 60%),
+                radial-gradient(50vw 40vw at 100% 10%, rgba(34, 211, 238, 0.22), transparent 60%),
+                radial-gradient(50vw 40vw at 50% 110%, rgba(244, 114, 182, 0.18), transparent 60%);
+        }
+        #net {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .header {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 18px 28px;
+            background: rgba(10, 16, 48, 0.55);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
+        }
+        .header::after {
             content: '';
             position: absolute;
-            top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
+            bottom: -1px;
+            height: 2px;
+            background: var(--grad);
+            background-size: 200% 100%;
+            animation: slide 6s linear infinite;
+            opacity: 0.9;
+        }
+        @keyframes slide { to { background-position: -200% 0; } }
+
+        .brand { display: flex; align-items: center; gap: 16px; min-width: 0; }
+        .avatar {
+            flex: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 17px;
+            color: #070b1a;
+            background: var(--grad);
+            box-shadow: 0 0 24px rgba(139, 92, 246, 0.55);
         }
         .header h1 {
             margin: 0;
-            font-size: 36px;
-            color: #ffffff;
+            font-size: 22px;
+            line-height: 1.2;
             font-weight: 700;
-            letter-spacing: 0.5px;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .header h1 span {
+            background: var(--grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         .header p {
-            margin: 8px 0 0 0;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.9);
+            margin: 2px 0 0 0;
+            font-size: 11.5px;
+            color: var(--muted);
+            font-weight: 300;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .actions { display: flex; gap: 10px; flex: none; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s, border-color 0.2s, background 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); border-color: var(--a); background: rgba(34, 211, 238, 0.1); }
+        .btn.primary {
+            color: #070b1a;
+            border: 0;
+            background: var(--grad);
+            box-shadow: 0 6px 22px rgba(139, 92, 246, 0.45);
+        }
+        .btn:focus-visible { outline: 2px solid var(--a); outline-offset: 3px; }
+
+        .iframe-wrapper {
             position: relative;
             z-index: 1;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-        .iframe-wrapper {
             flex: 1;
-            overflow: hidden;
-            background: #f8f9fa;
+            min-height: 0;
             padding: 20px;
             display: flex;
+        }
+        .frame {
+            position: relative;
+            flex: 1;
+            border-radius: 16px;
+            padding: 2px;
+            background: var(--grad);
+            box-shadow: 0 10px 50px rgba(139, 92, 246, 0.35), 0 0 80px rgba(34, 211, 238, 0.12);
+        }
+        .frame-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #0d1330;
         }
         iframe {
             border: none;
             width: 100%;
             height: 100%;
             display: block;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        iframe.ready { opacity: 1; }
+
+        .loader {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            text-align: center;
+            padding: 20px;
+            background: #0d1330;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+        .loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+        .spinner {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--a);
+            border-right-color: var(--b);
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.25);
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loader strong { font-size: 16px; font-weight: 600; }
+        .loader small { color: var(--muted); font-size: 13px; font-weight: 300; max-width: 360px; }
+        .hint { display: none; flex-direction: column; align-items: center; gap: 12px; }
+        .hint.show { display: flex; }
+        .bars { display: flex; gap: 6px; }
+        .bars i {
+            width: 8px;
+            height: 22px;
+            border-radius: 4px;
+            background: var(--grad);
+            animation: bounce 1s ease-in-out infinite;
+        }
+        .bars i:nth-child(2) { animation-delay: 0.12s; }
+        .bars i:nth-child(3) { animation-delay: 0.24s; }
+        .bars i:nth-child(4) { animation-delay: 0.36s; }
+        @keyframes bounce { 0%, 100% { transform: scaleY(0.4); opacity: 0.5; } 50% { transform: scaleY(1); opacity: 1; } }
+
+        @media (max-width: 720px) {
+            .header { padding: 12px 14px; }
+            .header h1 { font-size: 17px; }
+            .header p { letter-spacing: 1px; font-size: 10px; }
+            .avatar { width: 38px; height: 38px; font-size: 14px; border-radius: 11px; }
+            .btn.ghost { display: none; }
+            .btn { padding: 8px 14px; font-size: 12px; }
+            .iframe-wrapper { padding: 10px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; }
         }
     </style>
 </head>
 <body>
+    <div class="aurora"></div>
+    <canvas id="net" aria-hidden="true"></canvas>
+
     <div class="container">
-        <div class="header">
-            <h1>Abhishek Kumar Portfolio</h1>
-            <p>CREATIVE DEVOPS & AI ENTHUSIAST</p>
-        </div>
-        <div class="iframe-wrapper">
-            <iframe src="https://abhishekk27-abhishek-portfolio.hf.space"></iframe>
-        </div>
+        <header class="header">
+            <div class="brand">
+                <div class="avatar" aria-hidden="true">AK</div>
+                <div>
+                    <h1><span>Abhishek Kumar</span> Portfolio</h1>
+                    <p>CREATIVE DEVOPS &amp; AI ENTHUSIAST</p>
+                </div>
+            </div>
+            <nav class="actions">
+                <a class="btn ghost" href="https://github.com/abhishek27iiitdmj" target="_blank" rel="noopener">GitHub &#8599;</a>
+                <a class="btn primary" href="https://abhishekk27-abhishek-portfolio.hf.space" target="_blank" rel="noopener">Open full screen &#8599;</a>
+            </nav>
+        </header>
+
+        <main class="iframe-wrapper">
+            <div class="frame">
+                <div class="frame-inner">
+                    <div class="loader" id="loader">
+                        <div class="spinner"></div>
+                        <strong>Loading portfolio&hellip;</strong>
+                        <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                        <div class="hint" id="hint">
+                            <small>This is taking a little longer than usual. The app may be waking up.</small>
+                            <a class="btn primary" href="https://abhishekk27-abhishek-portfolio.hf.space" target="_blank" rel="noopener">Open it directly &#8599;</a>
+                        </div>
+                    </div>
+                    <iframe id="app" title="Abhishek Kumar portfolio" src="https://abhishekk27-abhishek-portfolio.hf.space"></iframe>
+                </div>
+            </div>
+        </main>
     </div>
+
+    <noscript>
+        <p style="position:fixed;bottom:12px;left:0;right:0;text-align:center;z-index:5">
+            <a style="color:#22d3ee" href="https://abhishekk27-abhishek-portfolio.hf.space">Open the portfolio</a>
+        </p>
+    </noscript>
+
+    <script>
+        (function () {
+            var frame = document.getElementById('app');
+            var loader = document.getElementById('loader');
+            var hint = document.getElementById('hint');
+            var done = false;
+
+            function ready() {
+                if (done) return;
+                done = true;
+                frame.classList.add('ready');
+                loader.classList.add('done');
+            }
+            frame.addEventListener('load', ready);
+            setTimeout(function () { if (!done) hint.classList.add('show'); }, 10000);
+            // Never leave the visitor stuck behind the loader if the load event is missed.
+            setTimeout(ready, 25000);
+
+            var c = document.getElementById('net');
+            if (!c || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            var x = c.getContext('2d'), W, H, pts = [];
+            function size() {
+                W = c.width = innerWidth;
+                H = c.height = innerHeight;
+                var n = Math.min(70, Math.floor(W * H / 20000));
+                pts = [];
+                for (var i = 0; i < n; i++) {
+                    pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35 });
+                }
+            }
+            addEventListener('resize', size);
+            size();
+            (function draw() {
+                x.clearRect(0, 0, W, H);
+                for (var i = 0; i < pts.length; i++) {
+                    var p = pts[i];
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < 0 || p.x > W) p.vx *= -1;
+                    if (p.y < 0 || p.y > H) p.vy *= -1;
+                    x.beginPath(); x.arc(p.x, p.y, 1.6, 0, 7);
+                    x.fillStyle = 'rgba(140,200,255,.7)'; x.fill();
+                    for (var j = i + 1; j < pts.length; j++) {
+                        var q = pts[j], d = Math.hypot(p.x - q.x, p.y - q.y);
+                        if (d < 120) {
+                            x.strokeStyle = 'rgba(139,92,246,' + (1 - d / 120) * 0.35 + ')';
+                            x.beginPath(); x.moveTo(p.x, p.y); x.lineTo(q.x, q.y); x.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(draw);
+            })();
+        })();
+    </script>
 </body>
 </html>
